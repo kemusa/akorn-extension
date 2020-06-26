@@ -1,0 +1,22 @@
+<app-page-header
+  [title]="clip.title"
+  [defaultHref]="['/clips']"
+></app-page-header>
+
+<ion-content>
+  <section>
+    <!-- <div class="container-wide"></div> -->
+  </section>
+  <div class="container-wide">
+    <ion-text><h1></h1></ion-text>
+    <div id="player"></div>
+    <div class="tags-container">
+      <div *ngFor="let tag of clip.tags">
+        <app-tag-factory-dark
+          [tag]="tag"
+          [size]="'large'"
+        ></app-tag-factory-dark>
+      </div>
+    </div>
+  </div>
+</ion-content>

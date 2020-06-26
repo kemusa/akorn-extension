@@ -1,0 +1,24 @@
+{
+  "name": "Akorn Property Hunter",
+  "version": "0.1",
+  "description": "Intelligent Deal Origination",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": ["activeTab", "webNavigation"],
+  "background": {
+    "scripts": ["background.js", "runtime.js"]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": ["<all_urls>"],
+      "all_frames": false,
+      "js": ["content.js", "runtime.js"]
+    }
+  ],
+  "page_action": {
+    "default_popup": "index.html",
+    "default_icon": "assets/icon/favicon.png",
+    "default_title": "Akorn Property Hunter"
+  },
+  "manifest_version": 2
+}

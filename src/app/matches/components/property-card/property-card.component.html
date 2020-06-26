@@ -1,0 +1,20 @@
+<!-- <div class="card-container">{{ property.name }}</div> -->
+<div class="card-container" (click)="presentModal()">
+  <ion-grid>
+    <ion-row>
+      <h1 class="card-title">
+        <span class="company-name">{{ match.company_name }} </span>
+        <span class="owns">owns</span>
+      </h1>
+    </ion-row>
+    <ion-row>
+      <div class="property-location">
+        <img class="icon-location" [src]="_locationIcon" />
+        <p class="property-address">{{ match.land_reg_property_address }}</p>
+      </div>
+    </ion-row>
+    <ion-row>
+      <app-uk-hold-tag [holdType]="match.tenure"></app-uk-hold-tag>
+    </ion-row>
+  </ion-grid>
+</div>

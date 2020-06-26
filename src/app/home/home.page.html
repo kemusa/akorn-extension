@@ -1,0 +1,27 @@
+<app-menu-header></app-menu-header>
+
+<ion-content>
+  <section id="header">
+    <div class="container-wide">
+      <h1 class="title-text">
+        Intelligent Real Estate Deal Origination.
+      </h1>
+      <!-- <ion-text>
+        <p class="action-text">Select a property on the map to get started</p>
+      </ion-text> -->
+    </div>
+  </section>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <!-- <div class="spin-container">
+          <ion-spinner *ngIf="isLoading"></ion-spinner>
+        </div> -->
+        <ion-img
+          *ngIf="!_isLoading && matches.length == 0"
+          [src]="placeholderImg"
+        ></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

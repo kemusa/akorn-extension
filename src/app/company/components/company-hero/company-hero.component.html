@@ -1,0 +1,12 @@
+<div class="top-wrapper">
+  <h1 id="company-name">{{ company.name }}</h1>
+  <p id="reg-no">Registration no. {{ company.regNo }}</p>
+  <div class="company-detail">
+    <img class="icon" [src]="_locationIcon" />
+    <p id="company-detail-text">{{ company.address }}</p>
+  </div>
+  <div class="company-detail">
+    <img class="icon" [src]="_addressIcon" />
+    <p id="company-detail-text">{{ company.type }}</p>
+  </div>
+</div>

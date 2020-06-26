@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "/Users/Kekura/nityTank"
+    },
+    {
+      "path": "/Users/Kekura/squadup.gg/squadup-build"
+    },
+    {
+      "path": "/Users/Kekura/typescript-node-template"
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "./node_modules/typescript/lib"
+  }
+}

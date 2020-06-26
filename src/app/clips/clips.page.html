@@ -1,0 +1,54 @@
+<app-menu-header></app-menu-header>
+
+<ion-content>
+  <section id="header">
+    <div class="container-wide">
+      <h1 class="title-text">
+        Intelligent Real Estate Deal Origination.
+      </h1>
+      <!-- <p class="sub-title-text">
+        Intelligent Real Estate Deal Origination.
+      </p> -->
+    </div>
+  </section>
+  <div class="container-wide">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img [src]="placeholder"></ion-img>
+        </ion-col>
+        <!-- <ion-col
+          *ngFor="let clip of clips"
+          size-xl="4"
+          size-lg="4"
+          size-md="6"
+          size-sm="12"
+          size-xs="12"
+        >
+          <ion-card (click)="toClip(clip)">
+            <div class="img-header">
+              <img class="icon" [src]="topicIcon" />
+              <div class="tags">
+                <app-tag-factory
+                  *ngFor="let tag of clip.tags"
+                  [tag]="tag"
+                  [size]="'small'"
+                >
+                </app-tag-factory>
+              </div>
+            </div>
+            <img id="thumbnail" class="video-img" [src]="clip.thumbnail" />
+            <ion-card-header>
+              <ion-card-title>{{ clip.title }}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- <ion-footer class="ion-no-border">
+    <ion-toolbar color="primary">
+      <ion-title>seequence</ion-title>
+    </ion-toolbar>
+  </ion-footer> -->
+</ion-content>

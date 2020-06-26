@@ -1,0 +1,11 @@
+<ion-item [formGroup]="parentForm">
+  <ion-label>{{ title }}</ion-label>
+  <ion-select cancelText="Dismiss" formControlName="{{ control }}">
+    <ion-select-option
+      *ngFor="let option of options"
+      value="{{ option.value }}"
+      >{{ option.text }}</ion-select-option
+    >
+  </ion-select>
+  <ion-icon *ngIf="iconName" name="{{ iconName }}" slot="start"></ion-icon>
+</ion-item>

@@ -1,0 +1,18 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <app-company-hero [company]="_company"></app-company-hero>
+  <div class="list-description">
+    {{_properties?.length}} properties associated with this company
+  </div>
+  <app-company-property-item
+    *ngFor="let prop of _properties"
+    [property]="prop"
+  ></app-company-property-item>
+</ion-content>

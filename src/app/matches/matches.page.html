@@ -1,0 +1,20 @@
+<app-menu-header></app-menu-header>
+
+<ion-content>
+  <div class="hero">
+    <img class="hero-img" [src]="_heroImg" />
+  </div>
+  <div class="cards-container">
+    <div class="header-text-container">
+      <h1 class="properties-heading-text">
+        We found {{ _matches?.matches.length }} companies that might own this
+        property!
+      </h1>
+      <p class="gmaps-address-text">{{ _matches.gmapAddress }}</p>
+    </div>
+    <app-property-card
+      *ngFor="let match of _matches?.matches"
+      [match]="match"
+    ></app-property-card>
+  </div>
+</ion-content>

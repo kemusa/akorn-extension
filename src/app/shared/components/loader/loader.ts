@@ -1,0 +1,3 @@
+interface LoaderState {
+  show: boolean;
+}

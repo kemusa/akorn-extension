@@ -1,0 +1,23 @@
+@mixin screen-sm
+  @media (min-width: $break-sm) and (max-width: #{$break-md - 1px})
+    @content
+
+@mixin screen-md
+  @media (min-width: $break-md) and (max-width: #{$break-lg - 1px})
+    @content
+  
+@mixin screen-lg
+  @media (min-width: $break-lg) and (max-width: #{$break-xl - 1px})
+    @content
+
+@mixin screen-xl
+  @media (min-width: #{$break-xl})
+    @content
+
+@mixin flex-row
+  display: flex
+  flex-direction: row
+
+@mixin flex-column
+  display: flex
+  flex-direction: column

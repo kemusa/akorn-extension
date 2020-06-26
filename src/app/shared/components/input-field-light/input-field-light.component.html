@@ -1,0 +1,9 @@
+<ion-item [formGroup]="parentForm">
+  <ion-label position="floating">{{ title }}</ion-label>
+  <ion-input
+    class="text-input"
+    type="{{ type }}"
+    formControlName="{{ control }}"
+  ></ion-input>
+  <ion-icon *ngIf="iconName" name="{{ iconName }}" slot="start"></ion-icon>
+</ion-item>
