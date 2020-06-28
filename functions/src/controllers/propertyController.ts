@@ -1,4 +1,4 @@
-import { BigQuery } from '@google-cloud/bigquery';
+import { BigQuery, Job, QueryResultsOptions } from '@google-cloud/bigquery';
 
 interface QueryOptions {
   query: string;
@@ -19,10 +19,7 @@ export class PropertyController {
     };
     // Run the query as a job
     const [job] = await this._bigquery.createQueryJob(options);
-    console.info(`Job ${job.id} started.`);
-    // Wait for the query to finish
-    const [rows] = await job.getQueryResults();
-    return rows;
+    return await this._startJob(job);
   };
 
   public getAllCompanyProperties = async (companyRegNo: string) => {
@@ -34,10 +31,30 @@ export class PropertyController {
     };
     // Run the query as a job
     const [job] = await this._bigquery.createQueryJob(options);
+    return await this._startJob(job);
+  };
+
+  public continueJob = async (jobId: string, pageToken: string) => {
+    const options: QueryResultsOptions = {
+      maxResults: 5,
+      pageToken: pageToken,
+    };
+    console.info(`Getting more results from Job ${jobId}.`);
+    const job = this._bigquery.job(jobId);
+    // Wait for the query to finish
+    const res = await job.getQueryResults(options);
+    return { matches: res[0], job: res[2] };
+  };
+
+  private _startJob = async (job: Job) => {
+    const options: QueryResultsOptions = {
+      maxResults: 5,
+      startIndex: '0',
+    };
     console.info(`Job ${job.id} started.`);
     // Wait for the query to finish
-    const [rows] = await job.getQueryResults();
-    return rows;
+    const res = await job.getQueryResults(options);
+    return { matches: res[0], job: res[2] };
   };
 
   private get _propertyOwnerQuery() {

@@ -1,6 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectorRef,
+  ViewChild,
+} from '@angular/core';
 import { LandRegistryService } from '../shared/services/land-registry.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonInfiniteScroll } from '@ionic/angular';
+import { CompanyService } from './services/company.service';
 
 @Component({
   selector: 'app-company',
@@ -8,23 +15,31 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./company.page.sass'],
 })
 export class CompanyPage implements OnInit {
-  @Input() land_reg_property_address: string;
-  @Input() postcode: string;
-  @Input() tenure: string;
-  @Input() company_name: string;
-  @Input() company_reg_no: string;
-  @Input() proprietorship_category: string;
-  @Input() company_address: string;
-  @Input() title_no: string;
+  // @Input() land_reg_property_address: string;
+  // @Input() postcode: string;
+  // @Input() tenure: string;
+  // @Input() company_name: string;
+  // @Input() company_reg_no: string;
+  // @Input() proprietorship_category: string;
+  // @Input() company_address: string;
+  // @Input() title_no: string;
   // todo: provide type for this company
   _company = {};
 
-  private _properties: Match[];
+  private _properties: MatchObject;
+  private _totalProperties: number;
+  @ViewChild(IonInfiniteScroll, { static: false })
+  _infiniteScroll: IonInfiniteScroll;
 
   constructor(
     private _landRegService: LandRegistryService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private _companyService: CompanyService,
+    private _changeDetection: ChangeDetectorRef
   ) {
+    this._companyService.company$.subscribe((match) => {
+      this._initCompany(match);
+    });
     // const properties$ = this._landRegService.getCompanyProperties(
     //   this.company_reg_no
     // );
@@ -38,18 +53,38 @@ export class CompanyPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  async ngOnInit() {
+  private async _loadData(event) {
+    if (this._properties.matches.length !== this._totalProperties) {
+      const data = await this._landRegService.getMoreQueryData(
+        this._properties.job.jobReference.jobId,
+        this._properties.job.pageToken
+      );
+      this._updateMatches(data);
+      this._properties.matches.push(...data.matches);
+      event.target.complete();
+      this._changeDetection.detectChanges();
+    } else {
+      this._infiniteScroll.disabled = true;
+    }
+  }
+
+  private async _updateMatches(update) {
+    this._properties.job = update.job;
+  }
+
+  private async _initCompany(match) {
     const properties = await this._landRegService.getCompanyProperties(
-      this.company_reg_no
+      match.company_reg_no
     );
     this._properties = properties;
-    // console.log('got properties');
-    // console.log(properties);
+    this._totalProperties = properties.job.totalRows;
     this._company = {
-      name: this.company_name,
-      regNo: this.company_reg_no,
-      type: this.proprietorship_category,
-      address: this.company_address,
+      name: match.company_name,
+      regNo: match.company_reg_no,
+      type: match.proprietorship_category,
+      address: match.company_address,
     };
   }
+
+  async ngOnInit() {}
 }

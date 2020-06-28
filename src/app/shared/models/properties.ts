@@ -13,5 +13,6 @@ interface Match {
 
 interface MatchObject {
   matches: Match[];
+  job: any;
   gmapAddress: string;
 }

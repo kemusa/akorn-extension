@@ -25,23 +25,23 @@ export class ChromeService {
   public initMapsListener() {
     chrome.runtime.onMessage.addListener(
       async (message, sender, sendResponse) => {
-        // change to check to [message.action == 'findProperty']
+        // todo: change to check to [message.action == 'findProperty']
         if (message.name && message.address) {
-          // this._loadingService.startLoading();
           const queryString = `${message.name} ${message.address}`;
           const place = await this._gmapsService.getMapsData(queryString);
           if (place) {
-            const matches = await this._landRegService.getPropertyOwners(
-              place.postcode
-            );
+            const {
+              matches,
+              job,
+            } = await this._landRegService.getPropertyOwners(place.postcode);
             // list matches
             this._matchService.listMatches({
               matches: matches,
+              job: job,
               gmapAddress: message.address,
             });
-            // this._loadingService.stopLoading();
           } else {
-            // send message on homepage saying "no companies matches to this property"
+            // todo: send message on homepage saying "no companies matches to this property"
           }
         }
       }

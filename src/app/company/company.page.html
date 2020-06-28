@@ -1,18 +1,33 @@
-<ion-header no-border>
+<!-- <ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<app-page-header [defaultHref]="['/']"></app-page-header>
 
 <ion-content color="light">
   <app-company-hero [company]="_company"></app-company-hero>
   <div class="list-description">
-    {{_properties?.length}} properties associated with this company
+    {{ _totalProperties }} properties associated with this company
   </div>
-  <app-company-property-item
-    *ngFor="let prop of _properties"
-    [property]="prop"
-  ></app-company-property-item>
+  <ion-list>
+    <app-company-property-item
+      *ngFor="let prop of _properties?.matches"
+      [property]="prop"
+    ></app-company-property-item>
+  </ion-list>
+
+  <ion-infinite-scroll
+    threshold="97px"
+    id="infinite-scroll"
+    (ionInfinite)="_loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      loading-spinner="bubbles"
+      loading-text="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

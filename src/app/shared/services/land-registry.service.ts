@@ -17,6 +17,22 @@ export class LandRegistryService {
         });
       return res;
     } catch (error) {
+      // todo: handle
+      console.error(error);
+    }
+  }
+
+  public async getMoreQueryData(jobId: string, pageToken: string) {
+    try {
+      const callable = await this._fns.httpsCallable('getMoreQueryData');
+      const res = await callable({ jobId, pageToken })
+        .toPromise()
+        .catch((error) => {
+          console.log(error);
+        });
+      return res;
+    } catch (error) {
+      // todo: handle
       console.error(error);
     }
   }
@@ -31,6 +47,7 @@ export class LandRegistryService {
         });
       return res;
     } catch (error) {
+      // todo: handle
       console.error(error);
     }
   }

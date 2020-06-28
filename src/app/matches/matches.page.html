@@ -7,14 +7,27 @@
   <div class="cards-container">
     <div class="header-text-container">
       <h1 class="properties-heading-text">
-        We found {{ _matches?.matches.length }} companies that might own this
-        property!
+        We found {{ _totalMatches }} companies that might own this property!
       </h1>
       <p class="gmaps-address-text">{{ _matches.gmapAddress }}</p>
     </div>
-    <app-property-card
-      *ngFor="let match of _matches?.matches"
-      [match]="match"
-    ></app-property-card>
+    <ion-list id="list">
+      <app-property-card
+        *ngFor="let match of _matches?.matches"
+        [match]="match"
+      ></app-property-card>
+    </ion-list>
+
+    <ion-infinite-scroll
+      threshold="775px"
+      id="infinite-scroll"
+      (ionInfinite)="_loadData($event)"
+    >
+      <ion-infinite-scroll-content
+        loading-spinner="bubbles"
+        loading-text="Loading more data..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

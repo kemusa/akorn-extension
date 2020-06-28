@@ -19,6 +19,15 @@ export const getPropertyOwners = functions
     res.status(200).send({ data });
   });
 
+export const getMoreQueryData = functions
+  .runWith(requestRunTimeOpts)
+  .https.onRequest(async (req, res) => {
+    const propController = new PropertyController();
+    const { jobId, pageToken } = req.body.data;
+    const data = await propController.continueJob(jobId, pageToken);
+    res.status(200).send({ data });
+  });
+
 export const getCompanyProperties = functions
   .runWith(requestRunTimeOpts)
   .https.onRequest(async (req, res) => {
