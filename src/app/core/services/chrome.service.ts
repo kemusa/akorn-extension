@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GmapsService } from 'src/app/shared/services/gmaps.service';
 import { LandRegistryService } from 'src/app/shared/services/land-registry.service';
 import { MatchService } from 'src/app/matches/services/match.service';
-// import { LoadingService } from './loading.service';
+import { LoaderService } from 'src/app/shared/components/loader/services/loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,8 @@ export class ChromeService {
   constructor(
     private _gmapsService: GmapsService,
     private _landRegService: LandRegistryService,
-    private _matchService: MatchService // private _loadingService: LoadingService
+    private _matchService: MatchService,
+    private _loader: LoaderService
   ) {}
 
   public initPopUp() {
@@ -25,6 +26,7 @@ export class ChromeService {
   public initMapsListener() {
     chrome.runtime.onMessage.addListener(
       async (message, sender, sendResponse) => {
+        this._loader.show();
         // todo: change to check to [message.action == 'findProperty']
         if (message.name && message.address) {
           const queryString = `${message.name} ${message.address}`;
@@ -40,8 +42,10 @@ export class ChromeService {
               job: job,
               gmapAddress: message.address,
             });
+            this._loader.hide();
           } else {
             // todo: send message on homepage saying "no companies matches to this property"
+            this._loader.hide();
           }
         }
       }

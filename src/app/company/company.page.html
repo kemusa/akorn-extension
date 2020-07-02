@@ -12,6 +12,27 @@
   <div class="list-description">
     {{ _totalProperties }} properties associated with this company
   </div>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="schedule">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>properties</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+
+      <ion-tab-button tab="speakers">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Owners</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="map">
+        <ion-icon name="shield-outline"></ion-icon>
+        <ion-label>Officers</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
   <ion-list>
     <app-company-property-item
       *ngFor="let prop of _properties?.matches"

@@ -28,7 +28,7 @@ export class MapsController {
       );
       return res.data;
     } catch (error) {
-      console.error(error);
+      console.error(error.stack);
     }
   };
 
@@ -39,7 +39,7 @@ export class MapsController {
       );
       return res.data;
     } catch (error) {
-      console.error(error);
+      console.error(error.stack);
     }
   };
 

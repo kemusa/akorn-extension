@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { BehaviorSubject } from 'rxjs';
-import { LoaderService } from '../components/loader/services/loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +9,9 @@ export class GmapsService {
   private _querySub = new BehaviorSubject<string>(null);
   public queries$ = this._querySub.asObservable();
 
-  constructor(
-    private _fns: AngularFireFunctions,
-    private loader: LoaderService
-  ) {}
+  constructor(private _fns: AngularFireFunctions) {}
 
   public async getMapsData(queryString: string) {
-    this.loader.show();
     const qs = this._queryFiler(queryString);
     if (qs) {
       const callable = await this._fns.httpsCallable('getMapsData');
@@ -25,10 +20,8 @@ export class GmapsService {
         .catch((error) => {
           console.log(error);
         });
-      this.loader.hide();
       return res;
     }
-    this.loader.hide();
     return qs;
   }
 

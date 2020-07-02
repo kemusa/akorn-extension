@@ -8,6 +8,7 @@ import {
 import { LandRegistryService } from '../shared/services/land-registry.service';
 import { ModalController, IonInfiniteScroll } from '@ionic/angular';
 import { CompanyService } from './services/company.service';
+import { LoaderService } from '../shared/components/loader/services/loader.service';
 
 @Component({
   selector: 'app-company',
@@ -35,7 +36,8 @@ export class CompanyPage implements OnInit {
     private _landRegService: LandRegistryService,
     private modalController: ModalController,
     private _companyService: CompanyService,
-    private _changeDetection: ChangeDetectorRef
+    private _changeDetection: ChangeDetectorRef,
+    private _loader: LoaderService
   ) {
     this._companyService.company$.subscribe((match) => {
       this._initCompany(match);
@@ -73,9 +75,11 @@ export class CompanyPage implements OnInit {
   }
 
   private async _initCompany(match) {
+    this._loader.show();
     const properties = await this._landRegService.getCompanyProperties(
       match.company_reg_no
     );
+    this._loader.hide();
     this._properties = properties;
     this._totalProperties = properties.job.totalRows;
     this._company = {
