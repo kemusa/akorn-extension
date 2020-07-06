@@ -1,0 +1,24 @@
+<!-- <app-company-hero [company]="_company"></app-company-hero> -->
+<div class="list-description">
+  <h3>{{ totalProperties }} properties associated with this company</h3>
+</div>
+<ion-content>
+  <ion-list class="ion-no-padding">
+    <app-company-property-item
+      *ngFor="let prop of properties?.matches"
+      [property]="prop"
+    ></app-company-property-item>
+  </ion-list>
+
+  <ion-infinite-scroll
+    threshold="97px"
+    id="infinite-scroll"
+    (ionInfinite)="_loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      loading-spinner="bubbles"
+      loading-text="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

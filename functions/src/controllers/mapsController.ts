@@ -11,14 +11,19 @@ export class MapsController {
   private _placeDetail: any = null;
 
   public getPlaceData = async (queryString: string) => {
-    const places = await this._getPlacesList(queryString);
-    if (places.results.length > 0) {
-      this._placeView = places.results[0];
-      const place = await this._getPlaceDetails(this._placeView.place_id);
-      this._placeDetail = place.result;
-      return this._placeConstructor();
+    try {
+      const places = await this._getPlacesList(queryString);
+      if (places.results.length > 0) {
+        this._placeView = places.results[0];
+        const place = await this._getPlaceDetails(this._placeView.place_id);
+        this._placeDetail = place.result;
+        return this._placeConstructor();
+      }
+      return null;
+    } catch (error) {
+      console.error(error.stack);
+      return null;
     }
-    return null;
   };
 
   private _getPlacesList = async (queryString: string) => {

@@ -13,12 +13,12 @@ export class LandRegistryService {
       const res = await callable(postcode)
         .toPromise()
         .catch((error) => {
-          console.log(error);
+          console.error(error.stack);
         });
       return res;
     } catch (error) {
       // todo: handle
-      console.error(error);
+      console.error(error.stack);
     }
   }
 
@@ -28,12 +28,12 @@ export class LandRegistryService {
       const res = await callable({ jobId, pageToken })
         .toPromise()
         .catch((error) => {
-          console.log(error);
+          console.error(error.stack);
         });
       return res;
     } catch (error) {
       // todo: handle
-      console.error(error);
+      console.error(error.stack);
     }
   }
 
@@ -43,12 +43,12 @@ export class LandRegistryService {
       const res = await callable(companyID)
         .toPromise()
         .catch((error) => {
-          console.log(error);
+          console.error(error.stack);
         });
       return res;
     } catch (error) {
       // todo: handle
-      console.error(error);
+      console.error(error.stack);
     }
   }
 }

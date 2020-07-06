@@ -1,54 +1,24 @@
-<!-- <ion-header no-border>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Close</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
 <app-page-header [defaultHref]="['/']"></app-page-header>
+<app-company-hero [company]="_company"></app-company-hero>
 
 <ion-content color="light">
-  <app-company-hero [company]="_company"></app-company-hero>
-  <div class="list-description">
-    {{ _totalProperties }} properties associated with this company
-  </div>
-
   <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="schedule">
-        <ion-icon name="calendar"></ion-icon>
-        <ion-label>properties</ion-label>
-        <ion-badge>6</ion-badge>
+    <ion-tab-bar slot="top">
+      <ion-tab-button tab="company-properties">
+        <!-- <ion-icon name="map"></ion-icon> -->
+        <ion-label>Properties</ion-label>
+        <!-- <ion-badge color="tertiary">{{ _totalProperties }}</ion-badge> -->
       </ion-tab-button>
 
-      <ion-tab-button tab="speakers">
-        <ion-icon name="person-circle"></ion-icon>
+      <ion-tab-button tab="company-owners">
+        <!-- <ion-icon name="people"></ion-icon> -->
         <ion-label>Owners</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="map">
-        <ion-icon name="shield-outline"></ion-icon>
+      <ion-tab-button tab="company-officers">
+        <!-- <ion-icon name="briefcase"></ion-icon> -->
         <ion-label>Officers</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
-
-  <ion-list>
-    <app-company-property-item
-      *ngFor="let prop of _properties?.matches"
-      [property]="prop"
-    ></app-company-property-item>
-  </ion-list>
-
-  <ion-infinite-scroll
-    threshold="97px"
-    id="infinite-scroll"
-    (ionInfinite)="_loadData($event)"
-  >
-    <ion-infinite-scroll-content
-      loading-spinner="bubbles"
-      loading-text="Loading more data..."
-    >
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>

@@ -1,0 +1,23 @@
+<div class="scrollable">
+  <div class="list-description">
+    <h3>Significant Owners of this company</h3>
+  </div>
+  <ion-list class="ion-no-padding">
+    <app-company-owner-card
+      *ngFor="let owner of owners"
+      [owner]="owner"
+    ></app-company-owner-card>
+  </ion-list>
+</div>
+
+<!-- <ion-infinite-scroll
+  threshold="97px"
+  id="infinite-scroll"
+  (ionInfinite)="_loadData($event)"
+>
+  <ion-infinite-scroll-content
+    loading-spinner="bubbles"
+    loading-text="Loading more data..."
+  >
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll> -->

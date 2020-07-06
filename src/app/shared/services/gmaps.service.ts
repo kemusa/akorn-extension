@@ -18,7 +18,7 @@ export class GmapsService {
       const res = await callable(queryString)
         .toPromise()
         .catch((error) => {
-          console.log(error);
+          console.error(error.stack);
         });
       return res;
     }

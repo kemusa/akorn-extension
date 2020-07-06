@@ -37,9 +37,18 @@ export const getCompanyProperties = functions
     res.status(200).send({ data });
   });
 
-export const getCompanyData = functions.https.onRequest(async (req, res) => {
+export const getCompanyOwners = functions.https.onRequest(async (req, res) => {
   const companyController = new CompanyController();
   const { companyId } = req.body.data;
-  const data = await companyController.getCompanyOfficers(companyId);
+  const data = await companyController.getCompanyOwners(companyId);
   res.status(200).send({ data });
 });
+
+export const getCompanyOfficers = functions.https.onRequest(
+  async (req, res) => {
+    const companyController = new CompanyController();
+    const { companyId } = req.body.data;
+    const data = await companyController.getCompanyOfficers(companyId);
+    res.status(200).send({ data });
+  }
+);

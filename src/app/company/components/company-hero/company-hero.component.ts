@@ -12,7 +12,5 @@ export class CompanyHeroComponent implements OnInit {
   _addressIcon: string = addressIcon;
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.company);
-  }
+  ngOnInit() {}
 }

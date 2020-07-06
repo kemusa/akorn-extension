@@ -1,0 +1,5 @@
+<ion-item>
+  <ion-icon *ngIf="isPerson" class="owner-icon" name="person"></ion-icon>
+  <ion-icon *ngIf="!isPerson" class="owner-icon" name="business"></ion-icon>
+  <p class="owner-name">{{ owner.name }}</p>
+</ion-item>

@@ -27,9 +27,8 @@ export class SearchFormComponent implements OnInit {
   properties;
   constructor(
     private formBuilder: FormBuilder,
-    private db: DbService
-  ) // private loadingService: LoadingService
-  {}
+    private db: DbService // private loadingService: LoadingService
+  ) {}
 
   async onSubmit() {
     // this.loadingService.startLoading();
@@ -40,7 +39,6 @@ export class SearchFormComponent implements OnInit {
     );
     this.properties = data;
     // this.loadingService.stopLoading();
-    console.log(data);
   }
 
   ngOnInit() {
