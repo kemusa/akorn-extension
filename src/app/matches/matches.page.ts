@@ -11,6 +11,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 export class MatchesPage implements OnInit {
   _matches: MatchObject = null;
   _totalMatches: number;
+  companyString: string = 'companies';
   _heroImg = '../../assets/images/properties-hero.svg';
   @ViewChild(IonInfiniteScroll, { static: false })
   _infiniteScroll: IonInfiniteScroll;
@@ -23,6 +24,9 @@ export class MatchesPage implements OnInit {
     this._matchService.matches$.subscribe((matches) => {
       this._totalMatches = parseInt(matches.job.totalRows);
       this._matches = matches;
+      if (this._totalMatches == 1) {
+        this.companyString = 'company';
+      }
     });
   }
 
